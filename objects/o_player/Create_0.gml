@@ -1,2 +1,4 @@
-/// @description Insert description here
-// You can write your code in this editor
+/// @description
+
+image_speed = 0
+spd = 1.5
