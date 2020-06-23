@@ -4,6 +4,7 @@ image_speed = 0
 spd = 1.5
 facing = dir.right
 global.life = 4
+player_direction = 0
 
 enum player {
 	move

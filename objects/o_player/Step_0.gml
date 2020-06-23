@@ -3,36 +3,38 @@
 #region // Player Movement
 
 image_speed = 0
-var _animation_speed = 0.6
+var animation_speed = 0.6
+x_input = keyboard_check(vk_right) - keyboard_check(vk_left)
+y_input = keyboard_check(vk_down) - keyboard_check(vk_up)
+
+player_direction = point_direction(0, 0, x_input, y_input)
 
 
-if keyboard_check(vk_right) && !place_meeting(x + 4, y, o_solid)
+if x_input != 0 && !place_meeting(x + spd * x_input, y, o_solid)
 	{
-		x += spd
+		x += spd * x_input
 		facing = dir.right
-		image_speed = _animation_speed
-		image_xscale = 1
-	}
-if keyboard_check(vk_left) && !place_meeting(x - 4, y, o_solid)
-	{
-		x -= spd
-		facing = dir.left
-		image_speed = _animation_speed
-		image_xscale = -1
+		image_speed = animation_speed
+		image_xscale = x_input
 	}
 	
-if keyboard_check(vk_up) && !place_meeting(x, y - 4, o_solid)
+if y_input != 0 && !place_meeting(x, y + spd * y_input, o_solid)
 	{
-		y -= spd	
-		facing = dir.up
-		image_speed = _animation_speed
-	}
-if keyboard_check(vk_down) && !place_meeting(x, y + 4, o_solid)
-	{
-		y += spd	
-		facing = dir.down
-		image_speed = _animation_speed
+		y += spd * y_input
+		if y_input < 0
+			{
+				facing = dir.up
+			}
+		else 
+			{
+				facing = dir.down
+			}
+		image_speed = animation_speed		
 	}
 	
 sprite_index = sprite[player.move, facing]
+if x_input == 0 && y_input == 0 
+	{
+		image_index = 0
+	}
 #endregion
